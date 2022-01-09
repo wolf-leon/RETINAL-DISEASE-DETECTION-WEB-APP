@@ -1,0 +1,99 @@
+ <!-- header -->
+
+ <%- include('./partials/header') %> 
+
+ <!-- header -->
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <!-- header section strats --> 
+
+    <%- include('./partials/navbar') %> 
+
+    <!-- end header section -->
+
+
+<!-- image upload section -->
+ <section >
+      <div class="jumbotron text-center" style="background: linear-gradient(#ADD8E6,#eec0c6);">
+        <h1 style="font-size: 50px;font-family: 'Roboto Mono', monospace;">Retinal Disease Prediction</h1> <br> 
+        <p class="col-md-10 mx-auto px-0" style="color: #1d1d1d; font-size: 25px;">
+          " The input image will be run in our model to distuinguish it accurately among Diabetic retinopathy (DR), Media Haze (MH) and Optic disc cupping (ODC). "
+         </p>
+         <img id="output" style="max-height: 450px;max-width: 450px;"><br><br>
+        <button type="button" id="button1" class="btn btn-primary rounded-pill">
+          <label>
+            <input type="file" id="myfile" accept="image/*" onchange="loadFile(event)" >
+            Upload Image &nbsp;&nbsp;<i class="bi bi-upload"></i>
+            </label>
+        </button>
+        <br><br>
+        <button type="button" id="button2" class="btn btn-primary rounded-pill " disabled>
+         Predict results &nbsp;&nbsp;<i class="bi bi-arrow-right"></i>
+      </button>
+         
+
+      <!-- output trial,will be updated later with css -->
+        <br><br><br><br> <div class="row">
+          <div class="col">
+            <h2 class="ml-3">predictions</h2>
+             <ol id="prediction-list"></ol>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-12">
+            <h2 class="ml-3">image</h2>
+             <img id="selected-image" class="ml-3"  src="" />
+          </div>
+        </div>
+         <!-- output trial,ends here -->
+
+      </div>
+
+</section>
+  <!-- end image upload  section -->
+
+
+  <!-- footer section -->
+
+  <%- include('./partials/footer') %> 
+
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- custom js -->
+  <script type="text/javascript" src="js/custom.js"></script>
+
+  <!-- previewing image js-->
+  <script>
+    var loadFile = function(event) {
+      var output = document.getElementById('output');
+      output.src = URL.createObjectURL(event.target.files[0]);
+      document.getElementById("myfile").disabled=true;
+      document.getElementById("button1").style.backgroundColor='#cccccc';
+      document.getElementById("button2").disabled=false;
+      output.onload = function() {
+        URL.revokeObjectURL(output.src) // free memory
+      }
+    };
+  </script>
+  <!-- End  previewing image  -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+  <script type="text/javascript" src="js\imageclass.js" ></script>
+  <script type="text/javascript" src="js\predict.js"></script>
+
+</body>
+
+</html>
